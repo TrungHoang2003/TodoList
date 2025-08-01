@@ -11,8 +11,8 @@ type Task struct {
 	Title       string           `json:"title"`
 	Description string           `json:"description"`
 	Date        marshalJSON.Date `json:"date"`
-	Priority    string           `json:"priority"`
-	
+	Priority    uint             `json:"priority"`
+
 	Completed bool `json:"completed"`
 
 	Section *Section `json:"section" gorm:"foreignKey:SectionId"`

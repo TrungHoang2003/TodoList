@@ -1,24 +1,29 @@
 ﻿package routes
 
 import (
-	"TodoApp/Api/Controllers"
+	"TodoApp/Api/controllers"
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(r *gin.Engine) {
+func RegisterRoutes(r *gin.Engine, userController *controllers.UserController) {
 	taskGroup := r.Group("/tasks")
 	{
-		taskGroup.GET("/", controllers.GetTasks)
-		taskGroup.POST("/", controllers.CreateTask)
-		taskGroup.PUT("/", controllers.UpdateTask)
-		taskGroup.DELETE("/", controllers.DeleteTask)
+		taskGroup.GET("/task", controllers.GetTasks)
+		taskGroup.POST("/create-section", controllers.CreateTask)
+		taskGroup.PUT("/update-section", controllers.UpdateTask)
+		taskGroup.DELETE("/delete-section", controllers.DeleteTask)
 	}
 
 	sectionGroup := r.Group("/sections")
 	{
-		sectionGroup.GET("/", controllers.GetSections)
-		sectionGroup.POST("/", controllers.CreateSection)
-		sectionGroup.DELETE("/", controllers.DeleteSection)
-		sectionGroup.PUT("/", controllers.UpdateSection)
+		sectionGroup.GET("/sections", controllers.GetSections)
+		sectionGroup.POST("/create-section", controllers.CreateSection)
+		sectionGroup.DELETE("/delete-section", controllers.DeleteSection)
+		sectionGroup.PUT("/update-section", controllers.UpdateSection)
+	}
+
+	userGroup := r.Group("/user")
+	{
+		userGroup.POST("/register", userController.Register)
 	}
 }
